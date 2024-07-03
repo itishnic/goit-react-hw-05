@@ -1,7 +1,56 @@
-import React from 'react'
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { getMoviesCast } from "../../api/movies-api";
+
 
 const MovieCast = () => {
-  return <div>MovieCast</div>;
+  const { movieId } = useParams();
+  const defaultImg = "/path/to/default-image.jpg";
+  
+
+  const [cast, setCast] = useState([]);
+  const [isloading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        setIsLoading(true);
+        const data = await getMoviesCast(movieId);
+        setCast(data);
+        console.log("data :>>", data);
+      } catch (error) {
+        setError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    getData();
+  }, [movieId]);
+
+
+  return (
+    <div>
+      {isloading && <div>Loader</div>}
+      {error && <div>Error</div>}
+
+      <ul>
+        {cast.map((actor) => (
+          <li key={actor.id}>
+            <img
+              src={
+                actor.profile_path
+                  ? `https://image.tmdb.org/t/p/w200${actor.profile_path}`
+                  : defaultImg
+              }
+              alt=""
+            />
+            {actor.name} as {actor.character}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }
 
 export default MovieCast

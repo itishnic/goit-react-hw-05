@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { searchMovies } from "../api/movies-api";
-import { Form, Link } from "react-router-dom";
+import {  Link } from "react-router-dom";
 import SearchForm from "../components/SearchForm/SearchForm";
 
 const MoviesPage = () => {
