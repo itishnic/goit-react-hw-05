@@ -1,4 +1,4 @@
-import { Route, Routes, NavLink } from "react-router-dom";
+import { Route, Routes,  } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/Home";
 
@@ -10,6 +10,7 @@ import Navigation from "./components/Navigation/Navigation";
 import MovieDetailsPage from "./pages/MovieDetailsPage";
 import MovieReviews from "./components/MovieReviews/MovieReviews";
 import MovieCast from "./components/MovieCast/MovieCast";
+   import NotFoundPage from "./pages/NotFoundPage";
 
 const App = () => {
   return (
@@ -18,14 +19,14 @@ const App = () => {
 
       <Routes>
         <Route path="/" element={<Home />} />
-          
 
         <Route path="/movies" element={<MoviesPage />} />
-       
+
         <Route path="/movies/:movieId" element={<MovieDetailsPage />}>
           <Route path="cast" element={<MovieCast />} />
           <Route path="reviews" element={<MovieReviews />} />
         </Route>
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
   );

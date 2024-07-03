@@ -3,10 +3,11 @@ import { useParams } from "react-router-dom";
 import { getMoviesCast } from "../../api/movies-api";
 
 
+
 const MovieCast = () => {
   const { movieId } = useParams();
-  const defaultImg = "/path/to/default-image.jpg";
-  
+
+  const defaultImg = "path/to/placeholder.svg"; 
 
   const [cast, setCast] = useState([]);
   const [isloading, setIsLoading] = useState(false);
@@ -28,7 +29,6 @@ const MovieCast = () => {
     getData();
   }, [movieId]);
 
-
   return (
     <div>
       {isloading && <div>Loader</div>}
@@ -43,9 +43,11 @@ const MovieCast = () => {
                   ? `https://image.tmdb.org/t/p/w200${actor.profile_path}`
                   : defaultImg
               }
-              alt=""
+              alt={actor.name}
             />
-            {actor.name} as {actor.character}
+            <div>
+              {actor.name} as {actor.character}
+            </div>
           </li>
         ))}
       </ul>

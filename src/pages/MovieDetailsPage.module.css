@@ -2,3 +2,8 @@
     display: flex;
     justify-content: flex-start;
 }
+
+
+a {
+  color: black; /* Замените на нужный цвет */
+}

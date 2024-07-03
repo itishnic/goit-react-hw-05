@@ -1,4 +1,5 @@
 import css from './SearchForm.module.css'
+import { HiSearch } from "@react-icons/all-files/hi/HiSearch";
 
 const SearchForm = ({ onSearch }) => {
     const handleSubmit = (evt) => {
@@ -17,8 +18,14 @@ const SearchForm = ({ onSearch }) => {
       form.reset();
     };
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="text" name="topic" placeholder="Search movies" />
+    <form onSubmit={handleSubmit}  className={css.wrapper}>
+      
+      <input
+        type="text"
+        name="topic"
+        placeholder="Search movies"
+       
+      />
       <button>Search</button>
     </form>
   );

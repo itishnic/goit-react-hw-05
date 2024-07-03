@@ -36,6 +36,8 @@ const MovieDetailsPage = () => {
   return (
     <div>
       <BackLink to={backLinkHref}> Go back</BackLink>
+      {isLoading && <div>Loader</div>}
+      {error && <div>Error</div>}
       {movie && (
         <div className={css.container}>
           <div>
@@ -58,7 +60,7 @@ const MovieDetailsPage = () => {
             <NavLink to="cast">Cast</NavLink>
           </li>
           <li>
-            <NavLink to="reviews" >Reviews</NavLink>
+            <NavLink to="reviews">Reviews</NavLink>
           </li>
         </ul>
         <Outlet />

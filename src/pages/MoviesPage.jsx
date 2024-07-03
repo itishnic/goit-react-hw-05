@@ -32,9 +32,9 @@ const MoviesPage = () => {
         {movies.length > 0 &&
           movies.map((movie) => (
             <li key={movie.id}>
-              <div> {movie.original_title}</div>
+              
 
-              <Link to={`/movies/${movie.id}`}>MovieDetailsPage</Link>
+              <Link to={`/movies/${movie.id}`}>{movie.original_title}</Link>
             </li>
           ))}
       </ul>
