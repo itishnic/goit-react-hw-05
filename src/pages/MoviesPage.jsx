@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect,  useState } from "react";
 import { searchMovies } from "../api/movies-api";
 
 
@@ -10,21 +10,21 @@ const MoviesPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
-  const username = searchParams.get("username");
+  const name = searchParams.get("name");
 
-const memoizedMovieList = useMemo(
-  () => <MovieList movies={movies} />,
-  [movies]
-);
+
 
 
   useEffect(() => {
     
-    if (username === "") return;
+    if (name === "")  {
+      alert("Please enter search term!");
+      return;
+    }
 
     async function fetchUser() {
       try {
-        const data = await searchMovies(username);
+        const data = await searchMovies(name);
         setMovies(data);
         console.log("data :>>", data)
       }
@@ -35,13 +35,13 @@ const memoizedMovieList = useMemo(
       }
     }
     fetchUser();
-  }, [username]);
+  }, [name]);
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.currentTarget;
-    setSearchParams({ username: form.elements.username.value });
+    setSearchParams({ name: form.elements.name.value });
     form.reset();
   };
   // const handleSubmit = async (topic) => {
@@ -61,13 +61,13 @@ const memoizedMovieList = useMemo(
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <input type="text" name="username" />
+        <input type="text" name="name" />
         <button type="submit">Search</button>
       </form>
       {/* <SearchForm onSearch={handleSearch} /> */}
       {isLoading && <div>Loader</div>}
       {error && <div>Error</div>}
-      {memoizedMovieList}
+      <MovieList movies={movies} />
 
       {/* <ul>
         {movies.length > 0 &&

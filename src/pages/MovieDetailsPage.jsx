@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams, Outlet, NavLink, useLocation } from "react-router-dom";
 import { getSingleMovieApi } from "../api/movies-api";
 import css from "./MovieDetailsPage.module.css";
@@ -12,7 +12,7 @@ const MovieDetailsPage = () => {
   
 
     const location = useLocation();
-    const backLinkHref = location.state ?? "/";
+    const backLinkHref = useRef(location.state ?? "/");
     
     
     
@@ -35,7 +35,7 @@ const MovieDetailsPage = () => {
 
   return (
     <div>
-      <BackLink to={backLinkHref}> Go back</BackLink>
+      <BackLink to={backLinkHref.current}> Go back</BackLink>
       {isLoading && <div>Loader</div>}
       {error && <div>Error</div>}
       {movie && (
