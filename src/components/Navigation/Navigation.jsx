@@ -11,7 +11,7 @@ const Navigation = () => {
     <div className={css.header}>
       <nav className={css.nav}>
         <NavLink to="/" className={buildLinkClass}>
-          Home
+          HomePage
         </NavLink>
 
         <NavLink to="/movies" className={buildLinkClass}>

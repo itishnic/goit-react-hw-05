@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { getMoviesApi } from "../api/movies-api";
-import { Link } from "react-router-dom";
 
-const Home = () => {
+import MovieList from "../components/MovieList/MovieList";
+
+const HomePage = () => {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -26,18 +27,19 @@ const Home = () => {
     return (
       <div>
         <h2>Trending today</h2>
-        <ul>
+        {isLoading && <div>Loader</div>}
+        {error && <div>Error</div>}
+        <MovieList  movies ={movies} />
+        {/* <ul>
           {movies.length > 0 &&
             movies.map((movie) => (
               <li key={movie.id}>
-                
-
                 <Link to={`/movies/${movie.id}`}>{movie.original_title}</Link>
               </li>
             ))}
-        </ul>
+        </ul> */}
       </div>
     );
 };
 
-export default Home;
+export default HomePage;

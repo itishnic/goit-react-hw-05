@@ -1,34 +1,75 @@
-import {  useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { searchMovies } from "../api/movies-api";
-import {  Link } from "react-router-dom";
-import SearchForm from "../components/SearchForm/SearchForm";
+
+
+import MovieList from "../components/MovieList/MovieList";
+import { useSearchParams } from "react-router-dom";
 
 const MoviesPage = () => {
   const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const username = searchParams.get("username");
 
-  const handleSearch = async (topic) => {
-    try {
-      setMovies([]);
-      setError(false);
-      setLoading(true);
-      const data = await searchMovies(topic);
+const memoizedMovieList = useMemo(
+  () => <MovieList movies={movies} />,
+  [movies]
+);
+
+
+  useEffect(() => {
+    
+    if (username === "") return;
+
+    async function fetchUser() {
+      try {
+        const data = await searchMovies(username);
         setMovies(data);
-        console.log("data :>>", data);
-    } catch (error) {
-      setError(true);
-    } finally {
-      setLoading(false);
+        console.log("data :>>", data)
+      }
+      catch (error) {
+        setError(true);
+      } finally {
+        setIsLoading(false);
+      }
     }
+    fetchUser();
+  }, [username]);
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    setSearchParams({ username: form.elements.username.value });
+    form.reset();
   };
+  // const handleSubmit = async (topic) => {
+  //   try {
+  //     setMovies([]);
+  //     setError(false);
+  //     setLoading(true);
+  //     const data = await searchMovies(topic);
+  //     setMovies(data);
+  //     console.log("data :>>", data);
+  //   } catch (error) {
+  //     setError(true);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
   return (
     <div>
-      <SearchForm onSearch={handleSearch} />
-      {loading && <div>Loader</div>}
+      <form onSubmit={handleSubmit}>
+        <input type="text" name="username" />
+        <button type="submit">Search</button>
+      </form>
+      {/* <SearchForm onSearch={handleSearch} /> */}
+      {isLoading && <div>Loader</div>}
       {error && <div>Error</div>}
+      {memoizedMovieList}
 
-      <ul>
+      {/* <ul>
         {movies.length > 0 &&
           movies.map((movie) => (
             <li key={movie.id}>
@@ -37,7 +78,7 @@ const MoviesPage = () => {
               <Link to={`/movies/${movie.id}`}>{movie.original_title}</Link>
             </li>
           ))}
-      </ul>
+      </ul> */}
     </div>
   );
 };

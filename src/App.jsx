@@ -1,7 +1,6 @@
-import { Route, Routes,  } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import Home from "./pages/Home";
-
+import HomePage from "./pages/HomePage";
 
 import MoviesPage from "./pages/MoviesPage";
 import css from "./App.module.css";
@@ -10,7 +9,9 @@ import Navigation from "./components/Navigation/Navigation";
 import MovieDetailsPage from "./pages/MovieDetailsPage";
 import MovieReviews from "./components/MovieReviews/MovieReviews";
 import MovieCast from "./components/MovieCast/MovieCast";
-   import NotFoundPage from "./pages/NotFoundPage";
+import NotFoundPage from "./pages/NotFoundPage";
+
+
 
 const App = () => {
   return (
@@ -18,7 +19,7 @@ const App = () => {
       <Navigation />
 
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<HomePage />} />
 
         <Route path="/movies" element={<MoviesPage />} />
 
