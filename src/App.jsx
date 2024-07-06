@@ -32,7 +32,7 @@ const App = () => {
   return (
     <div className={css.container}>
       <Navigation />
-      <Suspense fallback={null}>
+      <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path="/" element={<HomePage />} />
 
