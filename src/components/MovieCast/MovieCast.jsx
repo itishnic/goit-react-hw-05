@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getMoviesCast } from "../../api/movies-api";
+// import css from "./MovieCast.module.css"
 
 
 
@@ -43,7 +44,7 @@ const MovieCast = () => {
                   ? `https://image.tmdb.org/t/p/w200${actor.profile_path}`
                   : defaultImg
               }
-              alt={actor.name}
+              alt={actor.name} 
             />
             <div>
               {actor.name} as {actor.character}

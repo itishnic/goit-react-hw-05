@@ -53,6 +53,7 @@ const MovieDetailsPage = () => {
           </div>
         </div>
       )}
+      <hr></hr>
       <div>
         <p>Additional information</p>
         <ul>

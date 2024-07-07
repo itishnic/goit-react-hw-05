@@ -27,6 +27,7 @@ const HomePage = () => {
     return (
       <div>
         <h2>Trending today</h2>
+        <hr></hr>
         {isLoading && <div>Loader</div>}
         {error && <div>Error</div>}
         <MovieList  movies ={movies} />
