@@ -30,14 +30,7 @@ const HomePage = () => {
         {isLoading && <div>Loader</div>}
         {error && <div>Error</div>}
         <MovieList  movies ={movies} />
-        {/* <ul>
-          {movies.length > 0 &&
-            movies.map((movie) => (
-              <li key={movie.id}>
-                <Link to={`/movies/${movie.id}`}>{movie.original_title}</Link>
-              </li>
-            ))}
-        </ul> */}
+        
       </div>
     );
 };
